@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BusBuddy — School bus, without the guessing</title>
+<style>
+:root{--navy:#0b1b3b;--navy2:#102b57;--blue:#246bfd;--sky:#eaf2ff;--yellow:#ffd447;--ink:#14213d;--muted:#6b7891;--line:#e4eaf3;--paper:#f5f8fd;--green:#14865c;--greenbg:#e0f8ec;--shadow:0 18px 50px #14213d12}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #80aaff;outline-offset:3px}
+.app{min-height:100vh;display:grid;grid-template-columns:250px minmax(0,1fr)}aside{background:linear-gradient(165deg,var(--navy),#112b53);color:white;padding:28px 18px;display:flex;flex-direction:column;gap:30px}.brand{display:flex;align-items:center;gap:11px;padding:0 10px}.logo{width:42px;height:42px;border-radius:14px;background:var(--yellow);display:grid;place-items:center;color:var(--navy);font-size:23px}.brand b{font-size:22px;letter-spacing:-.7px}.brand b span{color:var(--yellow)}.side-label{color:#9fb2d4;text-transform:uppercase;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:0 12px;margin-bottom:8px}.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;color:#d7e2f7;text-align:left;padding:12px 13px;border-radius:12px;display:flex;align-items:center;gap:12px}.nav button.active,.nav button:hover{background:#ffffff16;color:white}.nav .ico{width:22px;text-align:center;font-size:18px}.sidebar-bottom{margin-top:auto;border:1px solid #ffffff20;border-radius:16px;padding:14px;background:#ffffff09}.sidebar-bottom small{display:block;color:#a9bddf;margin-top:4px}.sidebar-bottom strong{font-size:13px}.main{min-width:0}.topbar{height:78px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,48px);gap:20px}.crumb{color:var(--muted);font-size:13px}.crumb b{color:var(--ink)}.top-actions{display:flex;align-items:center;gap:10px}.pill{border:1px solid var(--line);background:white;padding:8px 12px;border-radius:99px;color:var(--ink);font-size:12px;font-weight:700}.demo-pill{background:#fff7d5;border-color:#f7e6a1;color:#725400}.avatar{width:36px;height:36px;border-radius:50%;background:var(--sky);color:var(--blue);display:grid;place-items:center;font-weight:800}.content{max-width:1220px;margin:auto;padding:34px clamp(18px,4vw,48px) 50px}.welcome{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}.eyebrow{color:var(--blue);font-size:11px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}.welcome h1{font-size:clamp(27px,3vw,38px);line-height:1.15;letter-spacing:-1.3px;margin:7px 0}.welcome p{margin:0;color:var(--muted)}.date{color:var(--muted);font-size:13px;white-space:nowrap}.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(270px,1fr);gap:20px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}.card-pad{padding:22px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.card h2{font-size:16px;letter-spacing:-.3px;margin:0}.muted{color:var(--muted)}.small{font-size:12px}.bus-hero{background:linear-gradient(125deg,#0d2045,#17447e);color:#fff;padding:24px;position:relative;overflow:hidden}.bus-hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;border:1px solid #ffffff12;right:-50px;top:-100px;box-shadow:0 0 0 28px #ffffff08,0 0 0 58px #ffffff06}.hero-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:15px}.bus-label{display:flex;align-items:center;gap:13px}.bus-icon{width:52px;height:52px;border-radius:16px;background:var(--yellow);display:grid;place-items:center;font-size:27px;color:var(--navy)}.bus-label h2{font-size:20px;margin:0}.bus-label p{margin:2px 0 0;color:#c8d8f2;font-size:12px}.status{display:inline-flex;align-items:center;gap:6px;border-radius:99px;background:#d9f9e8;color:#116943;padding:6px 10px;font-size:11px;font-weight:800;white-space:nowrap}.status:before{content:"";width:6px;height:6px;border-radius:50%;background:#17a568}.hero-bottom{position:relative;z-index:1;display:flex;align-items:end;justify-content:space-between;gap:20px;margin-top:28px}.arrival-label{font-size:12px;color:#c8d8f2}.arrival-time{font-size:35px;line-height:1.2;font-weight:850;letter-spacing:-1.2px;margin-top:3px}.arrival-note{font-size:12px;color:#c8d8f2;margin-top:5px}.countdown{text-align:right}.countdown strong{display:block;font-size:27px;letter-spacing:-.8px}.countdown span{font-size:11px;color:#c8d8f2}.btn{border:0;background:var(--blue);color:white;font-weight:750;border-radius:12px;padding:11px 15px;box-shadow:0 6px 16px #246bfd22}.btn:hover{filter:brightness(.96)}.btn.yellow{background:var(--yellow);color:#17213b;box-shadow:none}.btn.outline{background:white;color:var(--ink);border:1px solid var(--line);box-shadow:none}.btn.sm{padding:8px 11px;font-size:12px}.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}.metric{border:1px solid var(--line);border-radius:15px;padding:15px}.metric .metric-icon{font-size:18px}.metric span{display:block;color:var(--muted);font-size:11px;margin-top:8px}.metric strong{display:block;font-size:15px;margin-top:2px}.map-art{height:220px;position:relative;background:#eaf1ed;overflow:hidden;border-radius:15px;border:1px solid #dfe8e2}.map-art svg{width:100%;height:100%;display:block}.map-tag{position:absolute;display:flex;align-items:center;gap:7px;background:white;padding:9px 11px;border-radius:12px;box-shadow:0 5px 18px #17365b20;font-size:12px;font-weight:800}.map-tag.bus{left:10%;top:28%;border:1px solid #d9e6ff}.map-tag.stop{right:8%;bottom:18%;border:1px solid #ffd8d8}.map-tag .dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}.map-tag.stop .dot{background:#ed5353}.map-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}.notice{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.notice:last-child{border-bottom:0;padding-bottom:0}.notice-icon{flex:0 0 36px;height:36px;border-radius:12px;background:#fff5d0;display:grid;place-items:center}.notice strong{display:block;font-size:13px}.notice p{margin:3px 0 0;color:var(--muted);font-size:12px}.notice time{display:block;color:#8b96aa;font-size:10px;margin-top:4px}.timeline{display:grid;gap:0}.event{display:grid;grid-template-columns:70px 18px minmax(0,1fr);gap:10px;min-height:74px}.event-time{font-size:12px;font-weight:800;padding-top:2px}.rail{position:relative;display:flex;justify-content:center}.rail:before{content:"";position:absolute;top:10px;bottom:-2px;width:2px;background:#dfe7f5}.event:last-child .rail:before{display:none}.event-dot{width:11px;height:11px;border:3px solid #c9dcff;background:var(--blue);border-radius:50%;position:relative;z-index:1}.event-copy strong{font-size:13px;display:block}.event-copy p{font-size:12px;color:var(--muted);margin:3px 0 0}.info{background:#eef5ff;border:1px solid #dbe9ff;color:#355780;padding:12px 13px;border-radius:12px;font-size:11px;margin-top:12px}.page{display:none}.page.active{display:block}.section-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px 0;border-bottom:1px solid var(--line)}.setting-row:last-child{border-bottom:0}.setting-row strong{font-size:13px;display:block}.setting-row small{font-size:11px;color:var(--muted)}.toggle{width:42px;height:24px;border:0;border-radius:99px;background:#cbd5e3;padding:3px;flex-shrink:0}.toggle:after{content:"";display:block;width:18px;height:18px;background:white;border-radius:50%;transition:transform .18s;box-shadow:0 1px 3px #0002}.toggle.on{background:var(--blue)}.toggle.on:after{transform:translateX(18px)}.toast{position:fixed;right:22px;bottom:22px;max-width:350px;background:#10264b;color:#fff;border-radius:15px;padding:16px 18px;box-shadow:0 15px 40px #0b1b3b35;display:none;z-index:10}.toast.show{display:block;animation:pop .2s ease-out}.toast strong{display:block;margin-bottom:3px}.toast span{font-size:12px;color:#d2def1}@keyframes pop{from{transform:translateY(8px);opacity:.5}to{transform:translateY(0);opacity:1}}.mobile-nav{display:none}.schedule-row{display:grid;grid-template-columns:76px 20px 1fr;gap:12px;padding:15px 0;border-bottom:1px solid var(--line)}.schedule-row:last-child{border-bottom:0}.time{font-weight:800;font-size:12px}.schedule-row strong{font-size:13px}.schedule-row p{margin:3px 0 0;color:var(--muted);font-size:12px}.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:11px;color:var(--muted);margin-top:12px}.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}.footer-note{font-size:11px;color:var(--muted);text-align:center;margin-top:25px}
+@media(max-width:850px){.app{grid-template-columns:1fr}aside{display:none}.topbar{height:64px}.content{padding-top:25px}.grid,.section-grid{grid-template-columns:1fr}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:8px 10px calc(8px + env(safe-area-inset-bottom));justify-content:space-around;z-index:5}.mobile-nav button{border:0;background:none;color:var(--muted);font-size:10px;display:grid;gap:3px;justify-items:center;padding:4px 10px}.mobile-nav button.active{color:var(--blue);font-weight:800}.content{padding-bottom:100px}.welcome{align-items:start;flex-direction:column}.date{display:none}}
+@media(max-width:480px){.top-actions .demo-pill{display:none}.quick-grid{grid-template-columns:1fr 1fr}.quick-grid .metric:last-child{grid-column:span 2}.bus-hero{padding:19px}.hero-bottom{align-items:start;flex-direction:column}.countdown{text-align:left}.arrival-time{font-size:32px}.card-pad{padding:18px}.welcome h1{font-size:29px}}
+</style>
+
+<meta name="theme-color" content="#0b1b3b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BusBuddy">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="busbuddy-icon.svg">
+
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><div class="logo">🚌</div><b>Bus<span>Buddy</span></b></div>
+  <div><div class="side-label">Workspace</div><nav class="nav">
+    <button class="active" data-page="home"><span class="ico">⌂</span> Overview</button>
+    <button data-page="map"><span class="ico">⌖</span> Bus map</button>
+    <button data-page="schedule"><span class="ico">▦</span> Schedule</button>
+    <button data-page="alerts"><span class="ico">♧</span> Notifications <span style="margin-left:auto;background:#ffd447;color:#17213b;border-radius:99px;padding:1px 7px;font-size:10px">3</span></button>
+    <button data-page="settings"><span class="ico">⚙</span> Settings</button>
+  </nav></div>
+  <div class="sidebar-bottom"><div style="font-size:18px;margin-bottom:6px">✦</div><strong>A calmer school morning</strong><small>One stop. Clear updates. Less guessing.</small></div>
+  <div style="color:#8fa7cf;font-size:10px;padding:0 10px">BUS BUDDY · PROTOTYPE 1.0</div>
+</aside>
+<main class="main">
+  <header class="topbar"><div class="crumb">Workspace <span style="padding:0 7px;color:#b7c0cf">/</span> <b id="crumb">Overview</b></div><div class="top-actions"><span class="pill demo-pill">● SIMULATED DATA</span><button class="pill" id="testTop">♧ Test alert</button><div class="avatar">S</div></div></header>
+  <div class="content">
+    <section class="page active" id="page-home">
+      <div class="welcome"><div><div class="eyebrow">Your school commute</div><h1>Good morning, Steffi.</h1><p>Here's your bus plan for the school day.</p></div><div class="date" id="todayDate"></div></div>
+      <div class="grid">
+        <div>
+          <article class="card bus-hero">
+            <div class="hero-top"><div class="bus-label"><div class="bus-icon">🚌</div><div><h2>BUS 2</h2><p>Metcalfe Stop · To school</p></div></div><span class="status" id="statusPill">Scheduled</span></div>
+            <div class="hero-bottom"><div><div class="arrival-label">SCHEDULED ARRIVAL</div><div class="arrival-time">8:08 <span style="font-size:18px;letter-spacing:0">AM</span></div><div class="arrival-note">Monday–Friday · School days</div></div><div class="countdown"><strong id="countdown">—</strong><span id="countdownLabel">until scheduled arrival</span></div></div>
+          </article>
+          <div class="quick-grid">
+            <div class="metric"><div class="metric-icon">📍</div><span>YOUR STOP</span><strong>Metcalfe Stop</strong></div>
+            <div class="metric"><div class="metric-icon">🕗</div><span>USUAL TIME</span><strong>8:08 AM</strong></div>
+            <div class="metric"><div class="metric-icon">🔔</div><span>NEXT REMINDER</span><strong>7:30 AM</strong></div>
+          </div>
+          <article class="card card-pad" style="margin-top:20px">
+            <div class="card-head"><div><h2>Route preview</h2><div class="small muted" style="margin-top:3px">BUS 2 heading toward your stop</div></div><button class="btn outline sm" data-goto="map">Open map ↗</button></div>
+            <div class="map-art">
+              <svg viewBox="0 0 600 260" preserveAspectRatio="xMidYMid slice" aria-label="Illustrated simulated route map">
+                <rect width="600" height="260" fill="#eaf1ed"/>
+                <g fill="#d8e9d6"><path d="M0 0H155L122 68 0 84Z"/><path d="M415 0H600V80L490 96Z"/><path d="M0 185L95 170 132 260H0Z"/><path d="M390 180L600 140V260H430Z"/></g>
+                <g stroke="#fff" stroke-width="17" fill="none" stroke-linecap="round"><path d="M-30 70L180 120L260 70L430 120L630 70"/><path d="M30 -20L95 85L70 170L145 290"/><path d="M330 -20L300 70L355 145L330 280"/><path d="M470 -20L435 75L500 150L480 280"/><path d="M-20 220L150 175L280 205L410 180L620 220"/></g>
+                <g stroke="#d1dbd8" stroke-width="2" fill="none" stroke-linecap="round"><path d="M-30 70L180 120L260 70L430 120L630 70"/><path d="M30 -20L95 85L70 170L145 290"/><path d="M330 -20L300 70L355 145L330 280"/><path d="M470 -20L435 75L500 150L480 280"/><path d="M-20 220L150 175L280 205L410 180L620 220"/></g>
+                <path d="M100 90C175 120 205 160 290 150S410 145 500 205" stroke="#246bfd" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="1 0"/>
+                <path d="M100 90C175 120 205 160 290 150S410 145 500 205" stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="5 9" opacity=".85"/>
+                <g transform="translate(95 69)"><circle r="24" fill="#246bfd" opacity=".14"/><circle r="16" fill="#246bfd"/><text text-anchor="middle" y="6" font-size="17">🚌</text></g>
+                <g transform="translate(500 205)"><circle r="22" fill="#ef5555" opacity=".15"/><circle r="13" fill="#ef5555"/><circle r="4" fill="#fff"/></g>
+                <g fill="#5b766e" font-size="11" font-weight="700"><text x="175" y="46">PARK</text><text x="405" y="42">RESIDENTIAL AREA</text><text x="360" y="242">METCALFE STOP</text></g>
+              </svg>
+              <div class="map-tag bus"><span class="dot"></span> BUS 2 · SIMULATED</div><div class="map-tag stop"><span class="dot"></span> Metcalfe Stop</div>
+            </div>
+            <div class="map-footer"><span class="small muted">Illustrative route · Not a real map or GPS</span><button class="btn sm" data-goto="map">View route</button></div>
+          </article>
+        </div>
+        <div>
+          <article class="card card-pad">
+            <div class="card-head"><h2>Morning timeline</h2><span class="pill">Mon–Fri</span></div>
+            <div class="timeline">
+              <div class="event"><div class="event-time">7:30 AM</div><div class="rail"><span class="event-dot"></span></div><div class="event-copy"><strong>Morning reminder</strong><p>BUS 2 is scheduled for 8:08 AM.</p></div></div>
+              <div class="event"><div class="event-time">7:45 AM</div><div class="rail"><span class="event-dot"></span></div><div class="event-copy"><strong>Check your bus</strong><p>Open BusBuddy for the latest available status.</p></div></div>
+              <div class="event"><div class="event-time">8:00 AM</div><div class="rail"><span class="event-dot"></span></div><div class="event-copy"><strong>Arrival coming up</strong><p>Your scheduled arrival is getting closer.</p></div></div>
+              <div class="event"><div class="event-time">8:03 AM</div><div class="rail"><span class="event-dot"></span></div><div class="event-copy"><strong>5-minute demo alert</strong><p>A simulated alert for the prototype.</p></div></div>
+              <div class="event"><div class="event-time">8:08 AM</div><div class="rail"><span class="event-dot"></span></div><div class="event-copy"><strong>Scheduled arrival</strong><p>BUS 2 is scheduled at Metcalfe Stop.</p></div></div>
+            </div>
+            <div class="info">ⓘ Demo only: these are sample reminders, not live bus updates. Actual arrival times can vary.</div>
+          </article>
+          <article class="card card-pad" style="margin-top:20px">
+            <div class="card-head"><h2>Recent notifications</h2><button class="btn outline sm" data-goto="alerts">See all</button></div>
+            <div class="notice"><div class="notice-icon">🔔</div><div><strong>Morning reminder</strong><p>BUS 2 is scheduled for 8:08 AM.</p><time>Demo · 7:30 AM</time></div></div>
+            <div class="notice"><div class="notice-icon" style="background:#e7f0ff">🚌</div><div><strong>Bus status</strong><p>Check the app before heading out.</p><time>Demo · 7:45 AM</time></div></div>
+            <button class="btn yellow" id="testAlert" style="width:100%;margin-top:15px">▶ Preview a notification</button>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="page" id="page-map">
+      <div class="welcome"><div><div class="eyebrow">Route explorer</div><h1>Bus location</h1><p>See the sample route and your selected stop.</p></div><span class="pill demo-pill">● SIMULATED MAP</span></div>
+      <div class="section-grid">
+        <article class="card card-pad"><div class="card-head"><h2>BUS 2 route</h2><span class="status">Demo route</span></div><div class="map-art" style="height:360px"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice"><rect width="600" height="400" fill="#eaf1ed"/><g fill="#d8e9d6"><path d="M0 0H190L145 115 0 140Z"/><path d="M420 0H600V120L490 135Z"/><path d="M0 285L120 260 165 400H0Z"/><path d="M390 270L600 230V400H420Z"/></g><g stroke="#fff" stroke-width="22" fill="none" stroke-linecap="round"><path d="M-30 100L180 160L250 90L430 150L630 90"/><path d="M30 -20L95 120L70 260L145 420"/><path d="M330 -20L300 100L355 200L330 420"/><path d="M470 -20L435 100L500 210L480 420"/><path d="M-20 330L150 265L280 300L410 260L620 330"/></g><g stroke="#d1dbd8" stroke-width="2" fill="none"><path d="M-30 100L180 160L250 90L430 150L630 90"/><path d="M30 -20L95 120L70 260L145 420"/><path d="M330 -20L300 100L355 200L330 420"/><path d="M470 -20L435 100L500 210L480 420"/><path d="M-20 330L150 265L280 300L410 260L620 330"/></g><path d="M105 110C170 150 190 210 290 200S410 220 505 315" stroke="#246bfd" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M105 110C170 150 190 210 290 200S410 220 505 315" stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="5 9"/><g transform="translate(105 110)"><circle r="27" fill="#246bfd" opacity=".15"/><circle r="18" fill="#246bfd"/><text text-anchor="middle" y="6" font-size="18">🚌</text></g><g transform="translate(505 315)"><circle r="25" fill="#ef5555" opacity=".15"/><circle r="15" fill="#ef5555"/><circle r="4" fill="#fff"/></g><g fill="#5b766e" font-size="12" font-weight="700"><text x="180" y="60">PARK</text><text x="385" y="55">NEIGHBOURHOOD</text><text x="365" y="360">METCALFE STOP</text></g></svg><div class="map-tag bus"><span class="dot"></span> BUS 2</div><div class="map-tag stop"><span class="dot"></span> Metcalfe Stop</div></div><div class="legend"><span><i style="background:#246bfd"></i>Illustrative route</span><span><i style="background:#ef5555"></i>Your stop</span></div></article>
+        <article class="card card-pad"><div class="card-head"><h2>Stop details</h2><span class="pill">School trip</span></div><div style="display:flex;gap:14px;align-items:center;padding:16px;border-radius:14px;background:#f5f8fd"><div class="bus-icon">🚌</div><div><strong>BUS 2</strong><div class="small muted">Selected school bus</div></div></div><div class="setting-row"><div><strong>Selected stop</strong><small>Metcalfe Stop</small></div><span>📍</span></div><div class="setting-row"><div><strong>Scheduled arrival</strong><small>Monday–Friday</small></div><strong>8:08 AM</strong></div><div class="setting-row"><div><strong>Live GPS</strong><small>Not connected in prototype</small></div><span class="pill">Unavailable</span></div><div class="info">The marker is an illustration, not the bus's real position. We'll need an authorized live-data source before showing actual GPS.</div><button class="btn" style="width:100%;margin-top:16px" id="simulateMove">▶ Simulate a bus update</button></article>
+      </div>
+    </section>
+    <section class="page" id="page-schedule">
+      <div class="welcome"><div><div class="eyebrow">Plan ahead</div><h1>Bus schedule</h1><p>Your weekday reminders for BUS 2 at Metcalfe Stop.</p></div><span class="pill">Monday–Friday</span></div>
+      <article class="card card-pad"><div class="card-head"><div><h2>Morning schedule</h2><div class="small muted" style="margin-top:4px">All times are editable demo settings in this concept.</div></div><button class="btn outline sm" id="editTimes">Edit reminder times</button></div>
+        <div class="schedule-row"><div class="time">7:30 AM</div><div>🔔</div><div><strong>Morning reminder</strong><p>“Good morning! BUS 2 is scheduled for 8:08 AM at Metcalfe Stop.”</p></div></div>
+        <div class="schedule-row"><div class="time">7:45 AM</div><div>👀</div><div><strong>Check bus status</strong><p>“Check BusBuddy for the latest available update.”</p></div></div>
+        <div class="schedule-row"><div class="time">8:00 AM</div><div>🕗</div><div><strong>Arrival coming up</strong><p>“Your bus is scheduled soon. Actual timing may vary.”</p></div></div>
+        <div class="schedule-row"><div class="time">8:03 AM</div><div>🚌</div><div><strong>5-minute demo alert</strong><p>“Demo estimate: BUS 2 may be arriving soon.” Only use this wording when the data source supports it.</p></div></div>
+        <div class="schedule-row"><div class="time">8:08 AM</div><div>📍</div><div><strong>Scheduled arrival</strong><p>“BUS 2 is scheduled at Metcalfe Stop.”</p></div></div>
+        <div class="info">Reminder times are examples. This web prototype does not run a reliable background notification service when closed.</div>
+      </article>
+    </section>
+    <section class="page" id="page-alerts">
+      <div class="welcome"><div><div class="eyebrow">Stay in the loop</div><h1>Notifications</h1><p>Preview the messages BusBuddy could send.</p></div><button class="btn" id="testAlertsPage">＋ Test notification</button></div>
+      <article class="card card-pad"><div class="card-head"><h2>Notification inbox</h2><span class="pill">Sample messages</span></div>
+        <div class="notice"><div class="notice-icon">🌅</div><div><strong>Good morning — BUS 2</strong><p>BUS 2 is scheduled to arrive at Metcalfe Stop at 8:08 AM. Please check for updates.</p><time>Sample · 7:30 AM</time></div></div>
+        <div class="notice"><div class="notice-icon" style="background:#e8f1ff">🕗</div><div><strong>Time to check your bus</strong><p>It's 7:45 AM. Open BusBuddy to check any available bus status updates.</p><time>Sample · 7:45 AM</time></div></div>
+        <div class="notice"><div class="notice-icon" style="background:#e3f8eb">✓</div><div><strong>Scheduled arrival reminder</strong><p>BUS 2 is scheduled for 8:08 AM. This is a timetable reminder, not confirmation of arrival.</p><time>Sample · 8:08 AM</time></div></div>
+      </article>
+    </section>
+    <section class="page" id="page-settings">
+      <div class="welcome"><div><div class="eyebrow">Make it yours</div><h1>Settings</h1><p>Choose which reminders you'd like in the future app.</p></div><span class="pill">Prototype</span></div>
+      <div class="section-grid">
+        <article class="card card-pad"><div class="card-head"><h2>Your bus</h2></div><div class="setting-row"><div><strong>Bus</strong><small>Selected route</small></div><strong>BUS 2</strong></div><div class="setting-row"><div><strong>Stop</strong><small>Pickup location</small></div><strong>Metcalfe Stop</strong></div><div class="setting-row"><div><strong>Arrival time</strong><small>Weekday schedule</small></div><strong>8:08 AM</strong></div><div class="setting-row"><div><strong>School days</strong><small>Repeat schedule</small></div><strong>Mon–Fri</strong></div></article>
+        <article class="card card-pad"><div class="card-head"><h2>Notification preferences</h2></div>
+          <div class="setting-row"><div><strong>Morning reminder</strong><small>At 7:30 AM</small></div><button class="toggle on" role="switch" aria-checked="true" aria-label="Morning reminder" data-toggle="morning"></button></div>
+          <div class="setting-row"><div><strong>Status check reminder</strong><small>At 7:45 AM</small></div><button class="toggle on" role="switch" aria-checked="true" aria-label="Status check reminder" data-toggle="status"></button></div>
+          <div class="setting-row"><div><strong>Arrival reminders</strong><small>At 8:00 AM and 8:08 AM</small></div><button class="toggle on" role="switch" aria-checked="true" aria-label="Arrival reminders" data-toggle="arrival"></button></div>
+          <div class="setting-row"><div><strong>Simulated 5-minute alert</strong><small>Demo only, not live GPS</small></div><button class="toggle on" role="switch" aria-checked="true" aria-label="Simulated five minute alert" data-toggle="five"></button></div>
+          <button class="btn" style="width:100%;margin-top:18px" id="saveSettings">Save preferences</button>
+        </article>
+      </div>
+      <article class="card card-pad" style="margin-top:20px"><div class="card-head"><h2>About BusBuddy</h2><span class="pill">Version 1.0</span></div><p class="muted" style="font-size:13px;margin-bottom:0">BusBuddy is a concept prototype. It does not connect to STOPR, does not know the real location of BUS 2, and cannot guarantee background notifications. A future version would need an authorized data connection and a reliable notification service.</p></article>
+    </section>
+    <div class="footer-note">Made for calmer school mornings · BusBuddy prototype · Simulated information only</div>
+  </div>
+</main>
+</div>
+<nav class="mobile-nav"><button class="active" data-page="home"><span style="font-size:20px">⌂</span>Home</button><button data-page="map"><span style="font-size:20px">⌖</span>Map</button><button data-page="schedule"><span style="font-size:20px">▦</span>Schedule</button><button data-page="alerts"><span style="font-size:20px">♧</span>Alerts</button><button data-page="settings"><span style="font-size:20px">⚙</span>Settings</button></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"><strong id="toastTitle">BusBuddy demo alert</strong><span id="toastText">This is a simulated notification.</span></div>
+<script>
+const names={home:"Overview",map:"Bus map",schedule:"Schedule",alerts:"Notifications",settings:"Settings"};
+function go(page){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+page));document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));document.getElementById("crumb").textContent=names[page]||"Overview";window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.goto)));
+let toastTimer;
+function toast(title,message){const el=document.getElementById("toast");document.getElementById("toastTitle").textContent=title;document.getElementById("toastText").textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),4800)}
+function demoAlert(){toast("🚌 BUS 2 · Metcalfe Stop","Demo only: BUS 2 is scheduled for 8:08 AM. This is not a live GPS update.")}
+document.getElementById("testAlert").addEventListener("click",demoAlert);
+document.getElementById("testTop").addEventListener("click",demoAlert);
+document.getElementById("testAlertsPage").addEventListener("click",demoAlert);
+document.getElementById("simulateMove").addEventListener("click",()=>toast("Demo bus update","Simulated marker refreshed. No real bus location was requested."));
+document.getElementById("saveSettings").addEventListener("click",()=>toast("Preferences saved for this demo","Your switches are interactive in this prototype. Persistent saving will be added in a later version."));
+document.getElementById("editTimes").addEventListener("click",()=>toast("Schedule editor","Next build: we'll add editable reminder times and weekdays."));
+document.querySelectorAll("[data-toggle]").forEach(btn=>btn.addEventListener("click",()=>{const on=btn.classList.toggle("on");btn.setAttribute("aria-checked",String(on))}));
+const now=new Date();document.getElementById("todayDate").textContent=now.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
+function updateCountdown(){const n=new Date();const target=new Date(n);target.setHours(8,8,0,0);if(n>=target)target.setDate(target.getDate()+1);let mins=Math.max(0,Math.floor((target-n)/60000));let hrs=Math.floor(mins/60);mins%=60;document.getElementById("countdown").textContent=hrs?`${hrs}h ${mins}m`:`${mins} min`;document.getElementById("countdownLabel").textContent="until next 8:08 AM schedule"}
+updateCountdown();setInterval(updateCountdown,30000);
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch((error) => {
+      console.log("BusBuddy offline setup is unavailable in this preview:", error);
+    });
+  });
+}
+</script>
+
+</body>
+</html>

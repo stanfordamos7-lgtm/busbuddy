@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "BusBuddy — School Bus Companion",
+  "short_name": "BusBuddy",
+  "description": "A school bus schedule and notification prototype.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f7fc",
+  "theme_color": "#0b1b3b",
+  "icons": [
+    {
+      "src": "busbuddy-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
